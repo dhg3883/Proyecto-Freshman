@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <header class="ulacit-header">
+        <a class="logo" href="index.html">Ulacit</a>
+        <a class="MenuParte" href="cursos.html">Cursos</a>
+    </header>
+    <body>
+        <div class="main">
+            <h1>Cursos</h1>
+            <p>
+                En esta sección puede visualizar los cursos disponibles,
+                horarios y profesores.
+            </p>
+            <p id="carrito-info" style="margin-top: 8px; color: #fff;">Carrito: 0 cursos</p>
+            <button id="btn-checkout" type="button">Finalizar matrícula</button>
+        </div>
+        <div class="access-cards"></div>
+
+        <!-- Modal curso -->
+        <div class="modal" id="curso-modal" aria-hidden="true">
+            <div class="modal-content">
+                <button class="modal-close" id="modal-close">×</button>
+                <h2>Detalle del curso</h2>
+                <div id="modal-body"></div>
+                <div class="modal-actions">
+                    <button class="btn si" id="add-to-cart" type="button">Agregar al carrito</button>
+                    <button class="btn no" id="modal-cancel" type="button">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="index.js"></script>
+    </body>
+</html>

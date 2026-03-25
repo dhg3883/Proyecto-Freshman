@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Facturación de Matrícula</title>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        <header class="ulacit-header">
+            <a class="logo" href="index.html">Ulacit</a>
+        </header>
+        <main class="main" style="min-height: calc(100vh - 140px);">
+            <h1>Facturación</h1>
+            <p>Resumen de los cursos en tu carrito:</p>
+            <div id="factura-list"></div>
+            <button id="btn-volver" class="btn volver" type="button">Volver a
+                cursos</button>
+        </main>
+
+        <script>
+        const carrito = JSON.parse(localStorage.getItem('carritoCursos') || '[]');
+        const container = document.getElementById('factura-list');
+         document.getElementById('modal-cancel').addEventListener('click', cerrarModal);
+         function deleteCarrito(cookie){
+            localStorage.removeItem('carritoCursos');
+         }
+
+        if (carrito.length === 0) {
+            container.innerHTML = '<p>No hay cursos para facturar.</p>';
+        } else {
+            const lista = document.createElement('ol');
+            carrito.forEach((curso) => {
+                const item = document.createElement('li');
+                item.innerHTML = `<strong>${curso.codigo} - ${curso.nombre}</strong><br>
+                    Profesor: ${curso.profesor} <br>
+                    Horario: ${curso.horario}`;
+                lista.appendChild(item);
+            });
+            container.appendChild(lista);
+            container.insertAdjacentHTML('beforeend', `<p>Total cursos: ${carrito.length}</p>`);
+        }
+
+        document.getElementById('btn-volver').addEventListener('click', () => {
+            window.location.href = 'cursos.html';
+        });
+    </script>
+    </body>
+</html>
