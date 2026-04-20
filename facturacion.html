@@ -1,49 +1,149 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Facturación de Matrícula</title>
-        <link rel="stylesheet" href="index.css">
-    </head>
-    <body>
-        <header class="ulacit-header">
-            <a class="logo" href="index.html">Ulacit</a>
-        </header>
-        <main class="main" style="min-height: calc(100vh - 140px);">
-            <h1>Facturación</h1>
-            <p>Resumen de los cursos en tu carrito:</p>
-            <div id="factura-list"></div>
-            <button id="btn-volver" class="btn volver" type="button">Volver a
-                cursos</button>
-        </main>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Resumen de matrícula — Sistema de Matrícula ULACIT">
+  <title>Facturación | Sistema de Matrícula — ULACIT</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
+</head>
+<body>
 
-        <script>
-        const carrito = JSON.parse(localStorage.getItem('carritoCursos') || '[]');
-        const container = document.getElementById('factura-list');
-         document.getElementById('modal-cancel').addEventListener('click', cerrarModal);
-         function deleteCarrito(cookie){
-            localStorage.removeItem('carritoCursos');
-         }
+  <!-- ── Header ─────────────────────────────────── -->
+  <header class="ulacit-header">
+    <a class="logo" href="index.html">ULACIT</a>
 
-        if (carrito.length === 0) {
-            container.innerHTML = '<p>No hay cursos para facturar.</p>';
-        } else {
-            const lista = document.createElement('ol');
-            carrito.forEach((curso) => {
-                const item = document.createElement('li');
-                item.innerHTML = `<strong>${curso.codigo} - ${curso.nombre}</strong><br>
-                    Profesor: ${curso.profesor} <br>
-                    Horario: ${curso.horario}`;
-                lista.appendChild(item);
-            });
-            container.appendChild(lista);
-            container.insertAdjacentHTML('beforeend', `<p>Total cursos: ${carrito.length}</p>`);
-        }
+    <nav aria-label="Navegación principal">
+      <ul class="nav-menu" id="nav-menu">
+        <li><a class="nav-link" href="index.html"><span class="material-icons-round">home</span>Inicio</a></li>
+        <li><a class="nav-link" href="cursos.html"><span class="material-icons-round">menu_book</span>Cursos</a></li>
+        <li><a class="nav-link" href="about.html"><span class="material-icons-round">info</span>Acerca de</a></li>
+      </ul>
+    </nav>
 
-        document.getElementById('btn-volver').addEventListener('click', () => {
-            window.location.href = 'cursos.html';
-        });
-    </script>
-    </body>
+    <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ── Page wrapper ───────────────────────────── -->
+  <div class="page-wrapper">
+    <div class="invoice-wrap">
+
+      <!-- Confirmation message (hidden until confirmed) -->
+      <div class="confirm-msg" id="confirm-msg" role="alert">
+        <span class="material-icons-round">check_circle</span>
+        <h2>¡Matrícula confirmada!</h2>
+        <p>Sus cursos han sido registrados exitosamente. Guarde este comprobante para sus registros.</p>
+      </div>
+
+      <!-- Invoice card -->
+      <div class="invoice-card" id="invoice-card">
+        <div class="invoice-card-head">
+          <h1>Facturación de Matrícula</h1>
+          <p>Revise los cursos seleccionados antes de confirmar.</p>
+          <div class="invoice-meta" id="invoice-meta">
+            <!-- filled by JS -->
+          </div>
+        </div>
+
+        <div class="invoice-list-label">Cursos seleccionados</div>
+        <div id="factura-list"></div>
+
+        <div class="invoice-footer-bar">
+          <div class="invoice-total-text">
+            Total: <span id="total-count">0</span> curso(s)
+          </div>
+          <div class="invoice-btn-group">
+            <button id="btn-volver" class="btn btn-ghost" type="button">
+              <span class="material-icons-round">arrow_back</span> Volver a cursos
+            </button>
+            <button id="btn-confirmar" class="btn btn-primary" type="button">
+              <span class="material-icons-round">check_circle</span> Confirmar matrícula
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div><!-- /page-wrapper -->
+
+  <!-- ── Footer ─────────────────────────────────── -->
+  <footer class="site-footer">
+    <span class="footer-copy">
+      &copy; 2026 <strong>ULACIT</strong> — Universidad Latinoamericana de Ciencia y Tecnología
+    </span>
+    <nav class="footer-links" aria-label="Links del pie de página">
+      <a href="index.html">Inicio</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="about.html">Acerca de</a>
+    </nav>
+  </footer>
+
+  <script>
+    /* ── Hamburger ── */
+    const hamburger = document.getElementById('hamburger');
+    const navMenu   = document.getElementById('nav-menu');
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      navMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open);
+    });
+    navMenu.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    /* ── Invoice logic ── */
+    const carrito   = JSON.parse(localStorage.getItem('carritoCursos') || '[]');
+    const container = document.getElementById('factura-list');
+    const totalEl   = document.getElementById('total-count');
+    const metaEl    = document.getElementById('invoice-meta');
+
+    // Build metadata
+    const now = new Date();
+    metaEl.innerHTML = `
+      <span>Fecha: ${now.toLocaleDateString('es-CR', { year:'numeric', month:'long', day:'numeric' })}</span>
+      <span>Hora: ${now.toLocaleTimeString('es-CR', { hour:'2-digit', minute:'2-digit' })}</span>
+      <span>Período: I-2026</span>
+    `;
+
+    if (carrito.length === 0) {
+      container.innerHTML = '<div class="invoice-item"><p style="color:var(--clr-muted)">No hay cursos en el carrito.</p></div>';
+      document.getElementById('btn-confirmar').disabled = true;
+      document.getElementById('btn-confirmar').style.opacity = '0.4';
+    } else {
+      carrito.forEach((curso, i) => {
+        const item = document.createElement('div');
+        item.className = 'invoice-item';
+        item.innerHTML = `
+          <div class="course-name">${i + 1}. ${curso.codigo} &mdash; ${curso.nombre}</div>
+          <div class="course-meta">
+            <span><span class="material-icons-round">person</span> ${curso.profesor}</span>
+            <span><span class="material-icons-round">schedule</span> ${curso.horario}</span>
+          </div>
+        `;
+        container.appendChild(item);
+      });
+      totalEl.textContent = carrito.length;
+    }
+
+    /* ── Volver ── */
+    document.getElementById('btn-volver').addEventListener('click', () => {
+      window.location.href = 'cursos.html';
+    });
+
+    /* ── Confirmar ── */
+    document.getElementById('btn-confirmar').addEventListener('click', () => {
+      localStorage.removeItem('carritoCursos');
+      document.getElementById('confirm-msg').classList.add('show');
+      document.getElementById('invoice-card').style.opacity = '0.55';
+      document.getElementById('invoice-card').style.pointerEvents = 'none';
+    });
+  </script>
+</body>
 </html>

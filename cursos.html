@@ -1,40 +1,97 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="index.css">
-    </head>
-    <header class="ulacit-header">
-        <a class="logo" href="index.html">Ulacit</a>
-        <a class="MenuParte" href="cursos.html">Cursos</a>
-    </header>
-    <body>
-        <div class="main">
-            <h1>Cursos</h1>
-            <p>
-                En esta sección puede visualizar los cursos disponibles,
-                horarios y profesores.
-            </p>
-            <p id="carrito-info" style="margin-top: 8px; color: #fff;">Carrito: 0 cursos</p>
-            <button id="btn-checkout" type="button">Finalizar matrícula</button>
-        </div>
-        <div class="access-cards"></div>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Catálogo de cursos disponibles — Sistema de Matrícula ULACIT">
+  <title>Cursos | Sistema de Matrícula — ULACIT</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
+</head>
+<body>
 
-        <!-- Modal curso -->
-        <div class="modal" id="curso-modal" aria-hidden="true">
-            <div class="modal-content">
-                <button class="modal-close" id="modal-close">×</button>
-                <h2>Detalle del curso</h2>
-                <div id="modal-body"></div>
-                <div class="modal-actions">
-                    <button class="btn si" id="add-to-cart" type="button">Agregar al carrito</button>
-                    <button class="btn no" id="modal-cancel" type="button">Cancelar</button>
-                </div>
-            </div>
-        </div>
+  <!-- ── Header ─────────────────────────────────── -->
+  <header class="ulacit-header">
+    <a class="logo" href="index.html">ULACIT</a>
 
-        <script src="index.js"></script>
-    </body>
+    <nav aria-label="Navegación principal">
+      <ul class="nav-menu" id="nav-menu">
+        <li><a class="nav-link" href="index.html"><span class="material-icons-round">home</span>Inicio</a></li>
+        <li><a class="nav-link active" href="cursos.html"><span class="material-icons-round">menu_book</span>Cursos</a></li>
+        <li><a class="nav-link" href="about.html"><span class="material-icons-round">info</span>Acerca de</a></li>
+      </ul>
+    </nav>
+
+    <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ── Page wrapper ───────────────────────────── -->
+  <div class="page-wrapper">
+
+    <div class="main">
+      <h1 class="page-title">Cursos disponibles</h1>
+      <p class="page-subtitle">Haga clic en un curso para ver su detalle y agregarlo al carrito.</p>
+
+      <!-- Cart bar -->
+      <div class="cart-bar">
+        <div class="cart-left">
+          <span class="material-icons-round cart-icon">shopping_cart</span>
+          <span id="carrito-info">Carrito: 0 curso(s)</span>
+        </div>
+        <button id="btn-checkout" type="button">
+          Finalizar matrícula <span class="material-icons-round">arrow_forward</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Cards container (filled by JS) -->
+    <div class="access-cards" style="padding: 0 6%;"></div>
+
+    <!-- ── Modal ──────────────────────────────── -->
+    <div class="modal" id="curso-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div class="modal-content">
+        <button class="modal-close" id="modal-close" aria-label="Cerrar"><span class="material-icons-round">close</span></button>
+        <h2 id="modal-title">Detalle del curso</h2>
+        <div id="modal-body"></div>
+        <div class="modal-actions">
+          <button class="btn no"  id="modal-cancel" type="button"><span class="material-icons-round">close</span> Cancelar</button>
+          <button class="btn si"  id="add-to-cart"  type="button"><span class="material-icons-round">add_shopping_cart</span> Agregar al carrito</button>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- /page-wrapper -->
+
+  <!-- ── Footer ─────────────────────────────────── -->
+  <footer class="site-footer">
+    <span class="footer-copy">
+      &copy; 2026 <strong>ULACIT</strong> — Universidad Latinoamericana de Ciencia y Tecnología
+    </span>
+    <nav class="footer-links" aria-label="Links del pie de página">
+      <a href="index.html">Inicio</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="about.html">Acerca de</a>
+    </nav>
+  </footer>
+
+  <script src="index.js"></script>
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navMenu   = document.getElementById('nav-menu');
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      navMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open);
+    });
+    navMenu.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+</body>
 </html>

@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Acerca del Sistema de Matrícula en Línea de ULACIT — Información, características y guía de uso.">
+  <title>Acerca de | Sistema de Matrícula — ULACIT</title>
+  <link rel="stylesheet" href="index.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons+Round">
+</head>
+<body>
+
+  <!-- ── Header ─────────────────────────────────── -->
+  <header class="ulacit-header">
+    <a class="logo" href="index.html">ULACIT</a>
+
+    <nav aria-label="Navegación principal">
+      <ul class="nav-menu" id="nav-menu">
+        <li><a class="nav-link" href="index.html"><span class="material-icons-round">home</span>Inicio</a></li>
+        <li><a class="nav-link" href="cursos.html"><span class="material-icons-round">menu_book</span>Cursos</a></li>
+        <li><a class="nav-link active" href="about.html"><span class="material-icons-round">info</span>Acerca de</a></li>
+      </ul>
+    </nav>
+
+    <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ── Page wrapper ───────────────────────────── -->
+  <div class="page-wrapper">
+
+    <!-- About hero -->
+    <section class="about-hero">
+      <h1>Acerca del <span style="background:linear-gradient(135deg,#1abc9c,#9b59b6);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">Sistema de Matrícula</span></h1>
+      <p>
+        Una plataforma diseñada para simplificar el proceso de matrícula de los estudiantes de
+        ULACIT, con información en tiempo real y una experiencia intuitiva.
+      </p>
+    </section>
+
+    <!-- Features -->
+    <section class="section">
+      <div class="section-head">
+        <h2>Características principales</h2>
+        <p>Todo lo que necesitas para una matrícula sin complicaciones.</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card">
+          <span class="material-icons-round feature-icon">public</span>
+          <h3>Acceso en línea 24/7</h3>
+          <p>Realiza tu matrícula desde cualquier lugar y en cualquier momento, sin necesidad de asistir físicamente a la universidad.</p>
+        </div>
+        <div class="feature-card">
+          <span class="material-icons-round feature-icon">update</span>
+          <h3>Cupos en tiempo real</h3>
+          <p>Consulta la disponibilidad actualizada de cada curso antes de seleccionarlo, evitando sorpresas de último momento.</p>
+        </div>
+        <div class="feature-card">
+          <span class="material-icons-round feature-icon">shopping_cart</span>
+          <h3>Carrito de matrícula</h3>
+          <p>Agrega varios cursos a tu carrito, revísalos con calma y confirma todos de una sola vez cuando estés listo.</p>
+        </div>
+        <div class="feature-card">
+          <span class="material-icons-round feature-icon">verified</span>
+          <h3>Confirmación inmediata</h3>
+          <p>Al finalizar, recibe un resumen de los cursos matriculados de forma instantánea con todos los detalles.</p>
+        </div>
+        <div class="feature-card">
+          <span class="material-icons-round feature-icon">devices</span>
+          <h3>Diseño responsivo</h3>
+          <p>Interfaz optimizada para computadoras, tabletas y teléfonos móviles. Matrícula desde el dispositivo que prefieras.</p>
+        </div>
+        <div class="feature-card">
+          <span class="material-icons-round feature-icon">save</span>
+          <h3>Datos persistentes</h3>
+          <p>Tu carrito se guarda automáticamente en el navegador, así no pierdes tu selección si cierras la pestaña por accidente.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Info grid -->
+    <section class="section">
+      <div class="section-head">
+        <h2>Información del sistema</h2>
+        <p>Detalles técnicos y guía de uso rápido.</p>
+      </div>
+
+      <div class="about-info-grid">
+
+        <div class="about-info-card">
+          <h2>Cómo usar el sistema</h2>
+          <ul>
+            <li>Ingresa a la sección <strong>Cursos</strong> desde el menú de navegación.</li>
+            <li>Explora las tarjetas de cursos disponibles. El color del borde indica la disponibilidad de cupos.</li>
+            <li>Haz clic en el curso que te interese para ver su detalle completo.</li>
+            <li>Presiona <strong>"Agregar al carrito"</strong> para incluirlo en tu selección.</li>
+            <li>Repite el proceso para todos los cursos deseados.</li>
+            <li>Cuando termines, presiona <strong>"Finalizar matrícula"</strong> para ir al resumen.</li>
+            <li>Revisa los cursos y confirma haciendo clic en <strong>"Confirmar matrícula"</strong>.</li>
+          </ul>
+        </div>
+
+        <div class="about-info-card">
+          <h2>Indicadores de cupos</h2>
+          <ul>
+            <li><strong style="color:#2ecc71">Verde</strong> — Cupos disponibles (más de 6).</li>
+            <li><strong style="color:#f1c40f">Amarillo</strong> — Cupos medios (3 a 6).</li>
+            <li><strong style="color:#e74c3c">Rojo</strong> — Cupos casi llenos (1 o 2).</li>
+            <li><strong style="color:rgba(255,255,255,.45)">Gris</strong> — Cupo completo, no disponible para matrícula.</li>
+          </ul>
+          <br>
+          <p>Los cupos se actualizan en tiempo real dentro de la sesión actual al agregar cursos al carrito.</p>
+        </div>
+
+        <div class="about-info-card">
+          <h2>Sobre ULACIT</h2>
+          <p>La Universidad Latinoamericana de Ciencia y Tecnología (ULACIT) es una institución privada de educación superior ubicada en San José, Costa Rica.</p>
+          <p>Fundada con el objetivo de brindar formación de calidad en áreas de ciencia, tecnología, negocios y humanidades, ULACIT cuenta con una amplia oferta académica para estudiantes de pregrado y posgrado.</p>
+        </div>
+
+        <div class="about-info-card">
+          <h2>Información técnica</h2>
+          <ul>
+            <li><strong>Plataforma:</strong> Aplicación web estática.</li>
+            <li><strong>Tecnologías:</strong> HTML5, CSS3, JavaScript ES6+.</li>
+            <li><strong>Almacenamiento:</strong> localStorage del navegador.</li>
+            <li><strong>Compatibilidad:</strong> Chrome, Firefox, Safari, Edge.</li>
+            <li><strong>Versión:</strong> 1.0.0 — Período I-2026.</li>
+          </ul>
+        </div>
+
+      </div>
+    </section>
+
+  </div><!-- /page-wrapper -->
+
+  <!-- ── Footer ─────────────────────────────────── -->
+  <footer class="site-footer">
+    <span class="footer-copy">
+      &copy; 2026 <strong>ULACIT</strong> — Universidad Latinoamericana de Ciencia y Tecnología
+    </span>
+    <nav class="footer-links" aria-label="Links del pie de página">
+      <a href="index.html">Inicio</a>
+      <a href="cursos.html">Cursos</a>
+      <a href="about.html">Acerca de</a>
+    </nav>
+  </footer>
+
+  <script>
+    const hamburger = document.getElementById('hamburger');
+    const navMenu   = document.getElementById('nav-menu');
+    hamburger.addEventListener('click', () => {
+      const open = hamburger.classList.toggle('open');
+      navMenu.classList.toggle('open');
+      hamburger.setAttribute('aria-expanded', open);
+    });
+    navMenu.querySelectorAll('.nav-link').forEach(link => {
+      link.addEventListener('click', () => {
+        hamburger.classList.remove('open');
+        navMenu.classList.remove('open');
+        hamburger.setAttribute('aria-expanded', 'false');
+      });
+    });
+  </script>
+</body>
+</html>
